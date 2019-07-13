@@ -11,12 +11,6 @@ $(function () {
     
     var stats = initStats();
 
-    function renderScene() {
-        stats.update();
-        requestAnimationFrame(renderScene);
-        renderer.render(scene, camera);
-    }
-    
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     var renderer = new THREE.WebGLRenderer();
@@ -66,5 +60,15 @@ $(function () {
     scene.add(spotLight);
 
     $("#WebGL-output").append(renderer.domElement);
+
+    function renderScene() {
+        stats.update();
+        cube.rotation.x += 0.02;
+        cube.rotation.y += 0.02;
+        cube.rotation.z += 0.02;
+        requestAnimationFrame(renderScene);
+        renderer.render(scene, camera);
+    }
+
     renderScene();
 });
