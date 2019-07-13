@@ -1,4 +1,22 @@
 $(function () {
+    function initStats() {
+        var stats = new Stats();
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        $("#Stats-output").append( stats.domElement );
+        return stats;
+    }
+    
+    var stats = initStats();
+
+    function renderScene() {
+        stats.update();
+        requestAnimationFrame(renderScene);
+        renderer.render(scene, camera);
+    }
+    
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     var renderer = new THREE.WebGLRenderer();
@@ -48,5 +66,5 @@ $(function () {
     scene.add(spotLight);
 
     $("#WebGL-output").append(renderer.domElement);
-    renderer.render(scene, camera);
+    renderScene();
 });
