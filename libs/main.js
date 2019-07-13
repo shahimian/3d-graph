@@ -8,6 +8,8 @@ $(function () {
         $("#Stats-output").append( stats.domElement );
         return stats;
     }
+
+    var step = 0;
     
     var stats = initStats();
 
@@ -63,9 +65,15 @@ $(function () {
 
     function renderScene() {
         stats.update();
+
         cube.rotation.x += 0.02;
         cube.rotation.y += 0.02;
         cube.rotation.z += 0.02;
+
+        step += 0.04;
+        sphere.position.x = 20 + 10 * Math.cos(step);
+        sphere.position.y = 2 + 10 * Math.abs(Math.sin(step));
+
         requestAnimationFrame(renderScene);
         renderer.render(scene, camera);
     }
