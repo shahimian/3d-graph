@@ -71,7 +71,10 @@ $(function () {
     spotLight.castShadow = true;
     scene.add(spotLight);
 
-    $("#WebGL-output").append(renderer.domElement);
+    var effect = new THREE.AsciiEffect(renderer);
+    effect.setSize(window.innerWidth, window.innerHeight);
+
+    $("#WebGL-output").append(effect.domElement);
 
     function renderScene() {
         stats.update();
@@ -85,7 +88,7 @@ $(function () {
         sphere.position.y = 2 + 10 * Math.abs(Math.sin(step));
 
         requestAnimationFrame(renderScene);
-        renderer.render(scene, camera);
+        effect.render(scene, camera);
     }
 
     renderScene();
